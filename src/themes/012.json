@@ -54,7 +54,7 @@
         "format-connected-foreground": "#cbd1cd",
         "format-connected-background": "#1e1e20",
         "format-connected-prefix-foreground": "#cbd1cd",
-        "ramp-signal-foreground": "#1e1e20"
+        "ramp-signal-foreground": "#c5c8c6"
     },
     "wallpaper": "012.png"
 }

@@ -1,17 +1,23 @@
 import os.path
-from shutil import copyfile
+from shutil import copyfile, copytree
 
 import fileutils as fileu
 import msgfunc as prnt
 
-def backup_file( config, back_file, destination):
-    if(fileu.locate_file(config[back_file])):
+def backup_file(config, back_file, destination):
+    if(os.path.exists(config[back_file])):
         prnt.prnt( '-s', 'Located your '+config[back_file]+' file!')
         try:
-            copyfile( config[back_file], destination)
+            if os.path.isdir(config[back_file]):
+                copytree(config[back_file], destination)
+            elif os.path.isfile(config[back_file]):
+                copyfile(config[back_file], destination)
+            else:
+                raise Exception('TypeError: not a directory nor a file')
             prnt.prnt( '-s', 'Backed it up successfully!')
             return True
-        except:
+        except Exception as e:
+            print(e)
             prnt.prnt( '-f', 'Failed to back it up!')
             return False
     else:
@@ -24,26 +30,12 @@ def backup_config( backup_folder, configuration):
     if( fileu.locate_folder(backup_folder) ):
         prnt.prnt( '-s', 'Located the backup folder.')
 
-        # Backup i3 file
-        if 'i3-config' in configuration:
-            if( backup_file( configuration, 'i3-config', backup_folder+'/i3.config')):
+        for key, value in configuration.items():
+            if(backup_file(configuration, key, backup_folder+ '/' +key)):
                 prnt.prnt( '-s', 'Success!')
             else:
                 prnt.prnt( '-f', 'Failed!')
 
-        # Backup Polybr config
-        if 'polybar-config' in configuration:
-            if( backup_file( configuration, 'polybar-config', backup_folder+'/polybar.config')):
-                prnt.prnt( '-s', 'Success!')
-            else:
-                prnt.prnt( '-f', 'Failed!')
-
-        # Backup xresources
-        if 'xresources' in configuration:
-            if( backup_file( configuration, 'xresources', backup_folder+'/xresources')):
-                prnt.prnt( '-s', 'Success!')
-            else:
-                prnt.prnt( '-f', 'Failed!')
 
     else:
        prnt.prnt( '-f', 'Failed to locate the backup folder.')

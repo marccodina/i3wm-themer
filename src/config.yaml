@@ -1,5 +1,5 @@
-i3-config: /home/v/.config/i3/config
-polybar-config: /home/v/.config/polybar/config
-xresources: /home/v/.Xresources
-nitrogen-config: /home/v/.config/nitrogen/bg-saved.cfg
-wallpaper-path: /home/v/.config/nitrogen/
+i3-config: /home/marc/.config/i3/config
+polybar-config: /home/marc/.config/polybar/config
+xresources: /home/marc/.Xresources
+nitrogen-config: /home/marc/.config/nitrogen/bg-saved.cfg
+wallpaper-path: /home/marc/.config/nitrogen/

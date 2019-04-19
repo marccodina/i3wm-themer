@@ -148,3 +148,13 @@ If you want to contribute to the project you can do it in two ways:
 This whole project wouldn't be possible without the creators of all those awesome tools:
 i3wm, i3-gaps, polybar and everyone who worked on those projects.
 </ul>
+
+
+-------------
+
+# MARC
+
+
+    python i3wm-themer.py --config config.yaml --install defaults/
+
+    python i3wm-themer.py --config config.yaml --load themes/012.json

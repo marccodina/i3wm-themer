@@ -1,6 +1,6 @@
 [colors]
 background = #222226
-foreground = #222
+foreground = #999
 disabled = #666
 primary = #b266ff
 warning = #ffb266
@@ -19,9 +19,6 @@ padding-right = 3
 module-margin-left = 3
 module-margin-right = 3
 
-;separator = |
-;separator-color = ${colors.primary}
-
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -33,9 +30,9 @@ font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
 font-2 = "Font Awesome 5 Brands:size=10;1"
 font-3 = "MaterialIcons:size=11;2"
 
-modules-left = powermenu cpu memory wlan
+modules-left = powermenu cpu memory disk battery
 modules-center = i3
-modules-right = volume backlight date
+modules-right = spotify volume backlight date wlan
 
 tray-position = right
 ;tray-padding =
@@ -54,17 +51,17 @@ label-mode-padding = 2
 label-mode-foreground = ${colors.disabled}
 label-mode-background = ${colors.background}
 
-label-focused = %index%
+label-focused = ⬤
 label-focused-foreground = ${colors.primary}
 label-focused-padding = 2
 
-label-unfocused = %index%
+label-unfocused = ⬤
 label-unfocused-padding = 2
 
-label-visible = %index%
+label-visible = ⬤
 label-visible-padding = 2
 
-label-urgent = %index%
+label-urgent = ⬤
 label-urgent-foreground = ${colors.alert}
 label-urgent-padding = 2
 
@@ -186,6 +183,9 @@ label-open = 
 label-open-foreground = ${colors.primary}
 label-close =  cancel
 label-close-foreground = ${colors.foreground}
+label-separator = |
+label-separator-padding = 4
+label-separator-foreground = ${colors.primary}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
@@ -265,6 +265,117 @@ bar-fill-foreground = ${colors.primary}
 bar-empty = ─
 bar-empty-font = 3
 bar-empty-foreground = ${colors.disabled}
+
+
+[module/battery]
+type = internal/battery
+full-at = 98
+
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
+time-format = %H:%M
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = %percentage%% %{F#66}(%consumption%W - %time%h)%{F-}
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = %percentage%% %{F#66}(%consumption%W - %time%h)%{F-}
+
+; Available tokens:
+;   %percentage% (default)
+label-full =  %percentage%%
+label-full-font = 5
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.alert}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.warning}
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-font = 5
+
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+bar-capacity-fill = █
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 2
+bar-capacity-empty = █
+bar-capacity-empty-font = 2
+bar-capacity-empty-foreground = #44ffffff
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+animation-charging-fill-font = 3
+animation-charging-empty-font = 3
+
+; Only applies if <animation-discharging> is used
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+; Framerate in milliseconds
+animation-discharging-framerate = 500
+animation-discharging-fill-font = 3
+animation-discharging-empty-font = 3
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging = <animation-charging> <label-charging>
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+format-full = <label-full>
+
+
+[module/disk]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted =  %mountpoint% %percentage_used%%
+label-unmounted =  %mountpoint% not mounted
+label-unmounted-foreground = #66
+
+
+[module/spotify]
+type = custom/script
+interval = 5
+; format-prefix = "  "
+format = <label>
+exec = ~/.config/polybar/spotify.py
+
+
+format-underline = ${colors.primary}
 
 
 [settings]

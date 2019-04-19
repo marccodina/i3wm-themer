@@ -1,5 +1,6 @@
 import os.path
 from shutil import copyfile
+import stat
 
 import fileutils as fileu
 import msgfunc as prnt
@@ -12,6 +13,9 @@ def _install_file(new_file, path):
         prnt.prnt( '-s', 'Located '+path+' file!')
         try:
             copyfile(new_file, path)
+            if path.endswith('sh') or path.endswith('py'):
+                st = os.stat(path)
+                os.chmod(path, st.st_mode | stat.S_IEXEC)
             prnt.prnt( '-s', 'Installed the new file successfully!')
             return True
         except:

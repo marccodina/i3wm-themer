@@ -4,21 +4,25 @@ from shutil import copyfile
 import fileutils as fileu
 import msgfunc as prnt
 
-def install_file( config, install_file, new_file):
-    if(fileu.locate_file(config[install_file])):
-        prnt.prnt( '-s', 'Located '+config[install_file]+' file!')
+def _install_file(new_file, path):
+    if not os.path.exists(os.path.dirname(path)):
+        os.makedirs(os.path.dirname(path))
+
+    if(fileu.locate_file(new_file)):
+        prnt.prnt( '-s', 'Located '+path+' file!')
         try:
-            copyfile(new_file, config[install_file])
+            copyfile(new_file, path)
             prnt.prnt( '-s', 'Installed the new file successfully!')
             return True
         except:
             prnt.prnt( '-f', 'Failed to install the new file!')
             return False
     else:
-        prnt.prnt( '-f', 'Could not locate '+config[install_file]+' file!')
+        prnt.prnt( '-f', 'Could not locate '+path+' file!')
         return False
 
-def install_defaults( temp_folder, configuration ):
+
+def install_defaults(temp_folder, configuration):
     prnt.prnt( '-n', 'Intalling the files from '+temp_folder+' file.')
 
     if(fileu.locate_folder(temp_folder)):
@@ -26,28 +30,30 @@ def install_defaults( temp_folder, configuration ):
 
         # Install default i3 file
         if 'i3-config' in configuration:
-            if( install_file( configuration, 'i3-config', temp_folder+'i3.template')):
+            if(_install_file(temp_folder+'i3.template', configuration['i3-config'])):
                prnt.prnt( '-s', 'Success!')
             else:
                 prnt.prnt( '-f', 'Failed!')
 
         # Install default polybar file
-        if 'polybar-config' in configuration:
-            if( install_file( configuration, 'polybar-config', temp_folder+'polybar.template')):
-               prnt.prnt( '-s', 'Success!')
-            else:
-                prnt.prnt( '-f', 'Failed!')
+        if 'polybar' in configuration:
+            for file in ["config", "power.sh", "spotify.py"]:
+                if(_install_file(temp_folder+'polybar/' + file, configuration['polybar'] + file)):
+                   prnt.prnt( '-s', 'Success!')
+                else:
+                    prnt.prnt( '-f', 'Failed!')
+
 
         # Install default Xresources file
         if 'xresources' in configuration:
-            if( install_file( configuration, 'xresources', temp_folder+'xresources.template')):
+            if(_install_file(temp_folder+'xresources.template', configuration['xresources'])):
                 prnt.prnt( '-s', 'Success!')
             else:
                 prnt.prnt( '-f', 'Failed!')
 
         # Install default nitrogen file
         if 'nitrogen-config' in configuration:
-            if( install_file( configuration, 'nitrogen-config', temp_folder+'bg-saved.template')):
+            if(_install_file(temp_folder+'bg-saved.template', configuration['nitrogen-config'])):
                 prnt.prnt( '-s', 'Success!')
             else:
                 prnt.prnt( '-f', 'Failed!')

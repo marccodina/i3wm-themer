@@ -1,5 +1,5 @@
 {
-    "xresources": {
+    "Xresources": {
         "background": "#1e1e20",
         "foreground": "#c5c8c6",
         "cursorcolor": "#c5c8c6",
@@ -24,7 +24,7 @@
         "rofi.color-active": "#1e1e20, #c5c8c6, #1e1e20, #1e1e20, #919893",
         "rofi.color-urgent": "#1e1e20, #c5c8c6, #1e1e20, #1e1e20, #919893"
     },
-    "i3wm": {
+    "i3": {
         "client.background": "#1e1e20",
         "client.focused": "#cbd1cd #1e1e20 #cbd1cd #cbd1cd #cbd1cd",
         "client.unfocused": "#cbd1cd #1e1e20 #cbd1cd #919893 #919893",

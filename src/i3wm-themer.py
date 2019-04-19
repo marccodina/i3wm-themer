@@ -43,7 +43,7 @@ if __name__=="__main__":
 
     if args.install != None :
         install.install_defaults( args.install, configuration)
-        com.refresh_all( configuration['xresources'], '')
+        com.refresh_all(configuration['.Xresources'], '')
         exit(0)
 
     if args.load != None:
@@ -52,5 +52,5 @@ if __name__=="__main__":
         ri.replace_i3( configuration, jfile)
         rp.replace_polybar( configuration, jfile)
         rw.replace_wallpaper( configuration, jfile)
-        com.refresh_all( configuration['xresources'], jfile['wallpaper'])
+        com.refresh_all(configuration['.Xresources'], jfile['wallpaper'])
         exit(0)

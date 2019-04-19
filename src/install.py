@@ -29,52 +29,24 @@ def _install_file(new_file, path):
 def install_defaults(temp_folder, configuration):
     prnt.prnt( '-n', 'Intalling the files from '+temp_folder+' file.')
 
-    if(fileu.locate_folder(temp_folder)):
+    if(os.path.isdir(temp_folder)):
         prnt.prnt( '-n', 'Located the folder.')
 
         for config_key, template_path in configuration.items():
-            if os.path.isdir(template_path):
-                for file in os.listdir(template_path):
-                    if(_install_file(temp_folder + os.path.basename(template_path) + '/' + file, configuration[config_key] + "/"+ file)):
+            tmp_path = temp_folder + os.path.basename(template_path)
+            if os.path.isdir(tmp_path):
+                for file in os.listdir(tmp_path):
+                    tmp_file = tmp_path + '/' + file
+                    final_file = configuration[config_key] + "/"+ file
+                    if(_install_file(tmp_file, final_file)):
                        prnt.prnt( '-s', 'Success!')
                     else:
                         prnt.prnt( '-f', 'Failed!')
             else:
-                if(_install_file(temp_folder + os.path.basename(template_path), template_path)):
+                if(_install_file(tmp_path, template_path)):
                    prnt.prnt( '-s', 'Success!')
                 else:
                     prnt.prnt( '-f', 'Failed!')
-
-
-        # Install default i3 file
-        # if 'i3-config' in configuration:
-        #     if(_install_file(temp_folder+'i3.template', configuration['i3-config'])):
-        #        prnt.prnt( '-s', 'Success!')
-        #     else:
-        #         prnt.prnt( '-f', 'Failed!')
-
-        # Install default polybar file
-        # if 'polybar' in configuration:
-        #     for file in ["config", "power.sh", "spotify.py"]:
-        #         if(_install_file(temp_folder+'polybar/' + file, configuration['polybar'] + file)):
-        #            prnt.prnt( '-s', 'Success!')
-        #         else:
-        #             prnt.prnt( '-f', 'Failed!')
-
-
-        # Install default Xresources file
-        # if 'xresources' in configuration:
-        #     if(_install_file(temp_folder+'xresources.template', configuration['xresources'])):
-        #         prnt.prnt( '-s', 'Success!')
-        #     else:
-        #         prnt.prnt( '-f', 'Failed!')
-
-        # Install default nitrogen file
-        # if 'nitrogen-config' in configuration:
-        #     if(_install_file(temp_folder+'bg-saved.template', configuration['nitrogen-config'])):
-        #         prnt.prnt( '-s', 'Success!')
-        #     else:
-        #         prnt.prnt( '-f', 'Failed!')
     else:
         prnt.prnt( '-f', 'Failed to locate the folder.')
         exit(9)

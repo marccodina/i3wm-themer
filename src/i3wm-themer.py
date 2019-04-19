@@ -42,15 +42,16 @@ if __name__=="__main__":
         exit(0)
 
     if args.install != None :
-        install.install_defaults( args.install, configuration)
+        install.install_defaults(args.install, configuration)
         com.refresh_all(configuration['.Xresources'], '')
         exit(0)
 
     if args.load != None:
-        jfile = lj.load_json( args.load)
-        rx.replace_xresources( configuration, jfile)
-        ri.replace_i3( configuration, jfile)
-        rp.replace_polybar( configuration, jfile)
-        rw.replace_wallpaper( configuration, jfile)
+        install.install_defaults('./defaults/', configuration)
+        jfile = lj.load_json('./themes/' + args.load + ".json")
+        rx.replace_xresources(configuration, jfile)
+        ri.replace_i3(configuration, jfile)
+        rp.replace_polybar(configuration, jfile)
+        rw.replace_wallpaper(configuration, jfile)
         com.refresh_all(configuration['.Xresources'], jfile['wallpaper'])
         exit(0)

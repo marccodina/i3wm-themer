@@ -88,73 +88,13 @@ Backup your files:
 This step will copy the files that you set in the `config.yaml` for safekeeping in case things go
 wrong.
 
-Install the `config files` located in the <a href="src/defaults">src/defaults/</a> directory (not 100% required but
-I suggest you do so just to be sure).
+Install:
 
-    python i3wm-themer.py --config config.yaml --install defaults/
+    python i3wm-themer.py --config config.yaml --load <theme_id>
 
-In case you get lost `$mod+Return` will open a new terminal, `$mode+d` will launch Rofi. (For the
-rest of the shortcuts just take a look on the config file for i3, and change them to your needs.)
-
-Now you are basically ready to go. Pick a theme you like from the collection and load it:
-
-    python i3wm-themer.py --config config.yaml --load themes/[theme_id].json
-
-(Where [theme_id] is the name of the theme you want to try!)
-
-TADA!!!
-
-Now every time you want to change a theme you can just run the command above with the theme you like
-and apply it instantly.
-
-You can always use the `--help` on the script to check the given options.
-</ul>
-
-<h2>Disclaimer</h2>
-<ul>
-I am not responsible for any harm done to your PC by anything in the repository. Use everything with
-caution!
-</ul>
 
 <h2>Available Themes</h2>
 <ul>
-Just take a look at the <a href="src/themes/">Theme collection</a> and pick the ones you like.
-
-![](workflow/themepreview.png?raw=true)
-
+ice
 </ul>
 
-<h2>Contribute to the project</h2>
-<ul>
-If you want to contribute to the project you can do it in two ways:
-<ul>
-<li>Add new themes by following this <a href="templates/README.md">guide</a></li>
-<li>Help with the script by helping cross out more things from the <a href="src/README.md">TODO</a> list</li>
-</ul>
-</ul>
-
-<h2>Author</h2>
-<ul>
-<a href="https://github.com/unix121">Stavros Grigoriou (unix121)</a>
-</ul>
-
-<h2>Support this project</h2>
-<ul>
-<a href="https://patreon.com/unix121">Patreon</a>
-</ul>
-
-<h2>Credits</h2>
-<ul>
-This whole project wouldn't be possible without the creators of all those awesome tools:
-i3wm, i3-gaps, polybar and everyone who worked on those projects.
-</ul>
-
-
--------------
-
-# MARC
-
-
-    python i3wm-themer.py --config config.yaml --install defaults/
-
-    python i3wm-themer.py --config config.yaml --load themes/012.json

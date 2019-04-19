@@ -33,28 +33,18 @@
         "client.placeholder": "#cbd1cd #1e1e20 #cbd1cd #919893 #919893"
     },
     "polybar": {
-        "background": "#1e1e20",
-        "foreground": "#c5c8c6",
+        "background": "#222227",
+        "background-alt": "#777",
+        "foreground": "#b266ff",
+        "foreground-alt": "#555",
+        "primary": "#b266ff",
+        "disabled": "#666",
+        "primary": "#b266ff",
+        "warning": "#ffb266",
+        "alert": "#ff6666",
         "modules-left": "i3",
         "modules-center": "date",
-        "modules-right": "wlan eth powermenu",
-        "label-unfocused-background": "#cbd1cd",
-        "label-unfocused-foreground": "#1e1e20",
-        "label-mode-background": "#cbd1cd",
-        "label-mode-foreground": "#1e1e20",
-        "label-focused-foreground": "#6b7443",
-        "label-focused-background": "#919893",
-        "label-visible-background": "#cbd1cd",
-        "label-visible-foreground": "#1e1e20",
-        "format-foreground": "#1e1e20",
-        "format-background": "#bdc4df",
-        "label-open-foreground": "#cbd1cd",
-        "label-close-foreground": "#cbd1cd",
-        "label-separator-foreground": "#cbd1cd",
-        "format-connected-foreground": "#cbd1cd",
-        "format-connected-background": "#1e1e20",
-        "format-connected-prefix-foreground": "#cbd1cd",
-        "ramp-signal-foreground": "#c5c8c6"
+        "modules-right": "wlan powermenu"
     },
     "wallpaper": "012.png"
 }

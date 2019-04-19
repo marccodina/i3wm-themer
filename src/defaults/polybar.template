@@ -1,3 +1,14 @@
+[colors]
+background = #222226
+background-alt = #666
+foreground = #222
+foreground-alt = #666
+disabled = #666
+primary = #b266ff
+warning = #ffb266
+alert = #ff6666
+
+
 [bar/i3wmthemer_bar]
 dpi = 192
 width = 100%
@@ -5,8 +16,8 @@ height = 50
 radius = 0
 fixed-center = false
 
-background = #272827
-foreground = #657b83
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 line-size = 3
 line-color =
@@ -20,7 +31,7 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "Source Code Pro Semibold:size=10;1"
+font-0 = "DejaVuSans:size=10;1"
 font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
 font-2 = "Font Awesome 5 Brands:size=10;1"
 
@@ -41,26 +52,27 @@ index-sort = true
 wrapping-scroll = false
 
 label-mode-padding = 2
-label-mode-foreground = #657b83
-label-mode-background = #272827
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.background}
 
 label-focused = %index%
-label-focused-background = #4E524F
-label-focused-foreground = #272827
+label-focused-foreground = ${colors.warning}
+label-focused-background = ${colors.background}
 label-focused-padding = 2
 
 label-unfocused = %index%
-label-unfocused-background = #7E807E
-label-unfocused-foreground = #272827
+label-unfocused-foreground = ${colors.disabled}
+label-unfocused-background = ${colors.background}
 label-unfocused-padding = 2
 
 label-visible = %index%
-label-visible-background = #7E807E
-label-visible-foreground = #272827
+label-visible-background = ${colors.background}
+label-visible-foreground = ${colors.foreground-alt}
 label-visible-padding = 2
 
 label-urgent = %index%
-label-urgent-background = #BA2922
+label-urgent-background = ${colors.alert}
+label-urgent-foreground = ${colors.background-alt}
 label-urgent-padding = 2
 
 [module/wlan]
@@ -69,19 +81,20 @@ interface = wlp2s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-foreground = #272827
-format-connected-background = #7E807E
+format-connected-foreground = ${colors.foreground}
+format-connected-background = ${colors.background}
 format-connected-padding = 2
-label-connected = %essid%
+label-connected = %local_ip%   ⬇ %downspeed%   ⬆ %upspeed%
+label-disconnected =  not connected
+label-disconnected-foreground = ${colors.foreground-alt}
 
-format-disconnected =
 
 ramp-signal-0 = 
 ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
-ramp-signal-foreground = #272827
+ramp-signal-foreground = ${colors.foreground}
 
 [module/eth]
 type = internal/network
@@ -89,10 +102,10 @@ interface = enx0c5b8f279a64
 interval = 3.0
 
 format-connected-padding = 2
-format-connected-foreground = #272827
-format-connected-background = #7E807E
+format-connected-foreground = ${colors.foreground}
+format-connected-background = ${colors.background}
 format-connected-prefix = " "
-format-connected-prefix-foreground = #272827
+format-connected-prefix-foreground = ${colors.foreground}
 label-connected = %local_ip%
 
 format-disconnected =
@@ -108,8 +121,8 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-foreground = #272827
-format-background = #7E807E
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
 format-padding = 2
 
 label = %date% %time%
@@ -122,11 +135,11 @@ expand-right = true
 format-spacing = 1
 
 label-open = 
-label-open-foreground = #657b83
+label-open-foreground = ${colors.primary}
 label-close =  cancel
-label-close-foreground = #BA2922
+label-close-foreground = ${colors.foreground}
 label-separator = |
-label-separator-foreground = #BA2922
+label-separator-foreground = ${colors.foreground}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1

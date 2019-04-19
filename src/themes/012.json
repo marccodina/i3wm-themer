@@ -33,18 +33,16 @@
         "client.placeholder": "#cbd1cd #1e1e20 #cbd1cd #919893 #919893"
     },
     "polybar": {
-        "background": "#222227",
-        "background-alt": "#777",
-        "foreground": "#b266ff",
-        "foreground-alt": "#555",
+        "background": "#222226",
+        "foreground": "#c5c8c6",
         "primary": "#b266ff",
-        "disabled": "#666",
+        "disabled": "#666666",
         "primary": "#b266ff",
         "warning": "#ffb266",
         "alert": "#ff6666",
-        "modules-left": "i3",
-        "modules-center": "date",
-        "modules-right": "wlan powermenu"
+        "modules-left": "powermenu cpu memory",
+        "modules-center": "i3",
+        "modules-right": "volume backlight date wlan"
     },
     "wallpaper": "012.png"
 }

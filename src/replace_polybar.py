@@ -6,9 +6,7 @@ import fileutils as fileu
 
 fields = [
     "background",
-    "background-alt",
     "foreground",
-    "foreground-alt",
     "disabled",
     "primary",
     "warning",

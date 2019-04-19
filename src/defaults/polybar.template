@@ -1,8 +1,6 @@
 [colors]
 background = #222226
-background-alt = #666
 foreground = #222
-foreground-alt = #666
 disabled = #666
 primary = #b266ff
 warning = #ffb266
@@ -16,34 +14,35 @@ height = 50
 radius = 0
 fixed-center = false
 
+padding-left = 3
+padding-right = 3
+module-margin-left = 3
+module-margin-right = 3
+
+;separator = |
+;separator-color = ${colors.primary}
+
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color =
-
 border-size = 0
-border-color =
-
-padding-left = 0
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 2
+border-color = ${colors.background}
 
 font-0 = "DejaVuSans:size=10;1"
 font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
 font-2 = "Font Awesome 5 Brands:size=10;1"
+font-3 = "MaterialIcons:size=11;2"
 
-modules-left = i3
-modules-center = date
-modules-right = wlan eth powermenu
+modules-left = powermenu cpu memory wlan
+modules-center = i3
+modules-right = volume backlight date
 
 tray-position = right
 ;tray-padding =
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
 
 [module/i3]
 type = internal/i3
@@ -52,28 +51,74 @@ index-sort = true
 wrapping-scroll = false
 
 label-mode-padding = 2
-label-mode-foreground = ${colors.foreground}
+label-mode-foreground = ${colors.disabled}
 label-mode-background = ${colors.background}
 
 label-focused = %index%
-label-focused-foreground = ${colors.warning}
-label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.primary}
 label-focused-padding = 2
 
 label-unfocused = %index%
-label-unfocused-foreground = ${colors.disabled}
-label-unfocused-background = ${colors.background}
 label-unfocused-padding = 2
 
 label-visible = %index%
-label-visible-background = ${colors.background}
-label-visible-foreground = ${colors.foreground-alt}
 label-visible-padding = 2
 
 label-urgent = %index%
-label-urgent-background = ${colors.alert}
-label-urgent-foreground = ${colors.background-alt}
+label-urgent-foreground = ${colors.alert}
 label-urgent-padding = 2
+
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label> <ramp-coreload>
+label = CPU
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = ${colors.primary}
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = ${colors.primary}
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = ${colors.primary}
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = ${colors.primary}
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = ${colors.warning}
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = ${colors.warning}
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = ${colors.alert}
+ramp-coreload-7 = █
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = ${colors.alert}
+
+
+[module/memory]
+type = internal/memory
+format = <label> <bar-used>
+label =  RAM
+
+bar-used-width = 15
+bar-used-foreground-0 = ${colors.primary}
+bar-used-foreground-1 = ${colors.primary}
+bar-used-foreground-2 = ${colors.warning}
+bar-used-foreground-3 = ${colors.alert}
+bar-used-indicator = |
+bar-used-indicator-font = 4
+bar-used-indicator-foreground = ${colors.foreground}
+bar-used-fill = ─
+bar-used-fill-font = 4
+bar-used-empty = ─
+bar-used-empty-font = 4
+bar-used-empty-foreground = ${colors.disabled}
+
 
 [module/wlan]
 type = internal/network
@@ -86,7 +131,7 @@ format-connected-background = ${colors.background}
 format-connected-padding = 2
 label-connected = %local_ip%   ⬇ %downspeed%   ⬆ %upspeed%
 label-disconnected =  not connected
-label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected-foreground = ${colors.disabled}
 
 
 ramp-signal-0 = 
@@ -95,6 +140,7 @@ ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-foreground = ${colors.foreground}
+
 
 [module/eth]
 type = internal/network
@@ -109,6 +155,7 @@ format-connected-prefix-foreground = ${colors.foreground}
 label-connected = %local_ip%
 
 format-disconnected =
+
 
 [module/date]
 type = internal/date
@@ -127,6 +174,7 @@ format-padding = 2
 
 label = %date% %time%
 
+
 [module/powermenu]
 type = custom/menu
 
@@ -138,8 +186,6 @@ label-open = 
 label-open-foreground = ${colors.primary}
 label-close =  cancel
 label-close-foreground = ${colors.foreground}
-label-separator = |
-label-separator-foreground = ${colors.foreground}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
@@ -163,8 +209,67 @@ menu-3-0-exec = pkill -KILL -u $USER
 menu-3-1 = cancel
 menu-3-1-exec = menu-open-0
 
+
+[module/volume]
+type = internal/volume
+
+format-volume = <label-volume> <bar-volume>
+label-volume = ""
+label-volume-foreground = ${colors.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.disabled}
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.primary}
+bar-volume-foreground-1 = ${colors.primary}
+bar-volume-foreground-2 = ${colors.primary}
+bar-volume-foreground-3 = ${colors.primary}
+bar-volume-foreground-4 = ${colors.primary}
+bar-volume-foreground-5 = ${colors.primary}
+bar-volume-foreground-6 = ${colors.primary}
+bar-volume-gradient = false
+bar-volume-indicator = │
+bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = ${colors.foreground}
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.disabled}
+;format-volume = <ramp-volume> <label-volume>
+;ramp-volume-0 = 
+;ramp-volume-1 = 
+;ramp-volume-2 = 
+;ramp-volume-3 = 
+
+
+[module/backlight]
+type = internal/backlight
+format = <ramp> <bar>
+
+card =  intel_backlight
+
+label = %percentage%%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-font = 3
+bar-indicator-foreground = ${colors.foreground}
+bar-fill = ─
+bar-fill-font = 3
+bar-fill-foreground = ${colors.primary}
+bar-empty = ─
+bar-empty-font = 3
+bar-empty-foreground = ${colors.disabled}
+
+
 [settings]
 screenchange-reload = true
+
 
 [global/wm]
 margin-top = 0
